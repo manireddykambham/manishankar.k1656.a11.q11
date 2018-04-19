@@ -4,57 +4,52 @@
 struct process
 {
       char pn;
-      int at, bt, ct, wt, tat,p;
-      int s;
+      int at, bt, ct, wt, tat,p,s;
 }pq [10];
  
-int limit;
+int n;
  
 void Arrival_Time_Sorting()
 {
       struct process temp;
       int i, j;
-      for(i = 0; i < limit - 1; i++)
+      for(i = 0; i < n - 1; i++)
       {
-            for(j = i + 1; j < limit; j++)
+            for(j = i + 1; j < n; j++)
             {
                   if(pq [i].at > pq[j].at)
                   {
                         temp = pq[i];
                         pq[i] = pq[j];
                         pq[j] = temp;
-                  }
-            }
-      }
-}
- 
-main()
+                  }}}}
+ main()
 {
       int i, time = 0, bt= 0,l;
       char c;
-      float wait_time = 0, tat= 0, average_waiting_time, average_turnaround_time;
-      printf("\nEnter Number of Processes:\t");
-      scanf("%d", &limit);
-      for(i = 0, c='A'; i < limit; i++, c++)
+      float wait_time = 0, tat= 0, awt, att;
+      printf("\n Enter Number of Processe adding: ");
+      scanf("%d", &n);
+      for(i = 0, c='A'; i < n; i++, c++)
       {
             pq[i].pn = c;
-            printf("\nEnter Details For Process[%C]:\n", pq[i].pn);
-            printf("Enter Arrival Time:\t");
+            printf("\n please fill Details For Process[%C]:\n", pq[i].pn);
+            printf(" Arrival Time:\t");
             scanf("%d", &pq [i].at );
-            printf("Enter Burst Time:\t");
+            printf(" Burst Time:\t");
             scanf("%d", &pq [i].bt);
-            printf("Enter Priority:\t");
+            printf(" Priority:\t");
             scanf("%d", &pq [i].p);
             pq[i].s = 0;
             bt= bt+ pq[i].bt;
       }
       Arrival_Time_Sorting();
       pq[9].p = -9999;
-      printf("\nProcess Name\tArrival Time\tBurst Time\tp\tWaiting Time");
+      printf("\n Process Name\tArrival Time\tBurst Time\tp\tWaiting Time");
       for(time = pq[0].at; time <bt;)
       {
             l= 9;
-            for(i = 0; i < limit; i++)
+            for(i = 0; i < n; i++)
             {
                   if(pq [i].at <= time && pq[i].s != 1 && pq[i].p > pq[l].p)
                   {
@@ -70,10 +65,8 @@ main()
             tat= tat+ pq[l].tat;
             printf("\n%c\t\t%d\t\t%d\t\t%d\t\t%d", pq[l].pn, pq[l].at, pq[l].bt, pq[l].p, pq[l].wt);
       }
-      average_waiting_time = wait_time / limit;
-      average_turnaround_time = tat / limit;
-      printf("\n\nAverage waiting time:\t%f\n", average_waiting_time);
-      printf("Average Turnaround Time:\t%f\n", average_turnaround_time);
+      awt = wait_time / n;
+      att = tat / n;
+      printf("\n\n Average waiting time:\t%f\n", awt);
+      printf(" Average Turnaround Time:\t%f\n", att);
 }
-
-
